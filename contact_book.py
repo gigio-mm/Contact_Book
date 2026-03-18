@@ -54,6 +54,17 @@ def mark_unmark_favorite(Contacts, index):
         print(f"\nInvalid Contact number. Please try again.")
     return
 
+def view_favorites(Contacts):
+    print("\nList of Favorite Contacts:")
+    for Index, Contact in enumerate(Contacts):
+        if Contact['favorite']:
+            status = "★"
+            name = Contact["name"]
+            phone = Contact["phone"]
+            email = Contact["email"]
+            print(f"{Index + 1}. [{status} ] {name} - Phone: {phone} / E-mail: {email}")
+    return
+
 Contacts = []
 while True:
     print("\nContact Book Menu:")
@@ -82,5 +93,7 @@ while True:
         view_contacts(Contacts)
         Index = int(input("Type the Contact Number you want to favorite / unfavorite: "))
         mark_unmark_favorite(Contacts, Index)
+    elif option == "5":
+        view_favorites(Contacts)
     elif option == "7":
         break
