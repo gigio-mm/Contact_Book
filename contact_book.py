@@ -12,7 +12,7 @@ def view_contacts(Contacts):
         name = Contact["name"]
         phone = Contact["phone"]
         email = Contact["email"]
-        print(f"{Index + 1}. [{status}] {name} - Phone: {phone} / E-mail: {email}")
+        print(f"{Index + 1}. [{status} ] {name} - Phone: {phone} / E-mail: {email}")
     return
 
 def edit_contact(Contacts, index):
@@ -24,9 +24,9 @@ def edit_contact(Contacts, index):
         print(f"\n--- Editing current contact: {current_contact['name']} ---")
         print("Tip: Press 'Enter' to keep the current information.")
 
-        new_name = input(f"Name {current_contact['name']} to: ")
-        new_phone = input(f"Change phone {current_contact['phone']} to: ")
-        new_email = input(f"Change email {current_contact['email']} to: ")
+        new_name = input(f"Name {current_contact['name']} to: ").strip()
+        new_phone = input(f"Change phone {current_contact['phone']} to: ").strip()
+        new_email = input(f"Change email {current_contact['email']} to: ").strip()
 
         if new_name:
             current_contact['name'] = new_name
@@ -37,7 +37,21 @@ def edit_contact(Contacts, index):
 
         print(f"\nContact {current_contact['name']} updated sucessfully!")
     else:
-        print("\nInvalid Contact number. Please try again.")
+        print(f"\nInvalid Contact number. Please try again.")
+    return
+
+def mark_unmark_favorite(Contacts, index):
+    real_index = int(index - 1)
+
+    if 0 <= real_index < len(Contacts):
+        current_contact = Contacts[real_index]
+        
+        current_contact['favorite'] = not current_contact['favorite']
+        
+        status_msg = "marked as" if current_contact['favorite'] else "unmarked as"
+        print(f"Contact {current_contact['name']} {status_msg} favorite.")
+    else:
+        print(f"\nInvalid Contact number. Please try again.")
     return
 
 Contacts = []
@@ -51,18 +65,22 @@ while True:
     print("6. Delete Contact")
     print("7. Exit")
 
-    escolha = input("Choose your option: ")
+    option = input("Choose your option: ")
 
-    if escolha == "1":
-        name = input("Enter Contact name: ")
-        phone = input("Enter Phone Number: ")
-        email = input("Enter Email Adress: ")
+    if option == "1":
+        name = input("Enter Contact name: ").strip()
+        phone = input("Enter Phone Number: ").strip()
+        email = input("Enter Email Adress: ").strip()
         add_contact(Contacts, name, phone, email)
-    elif escolha == "2":
+    elif option == "2":
         view_contacts(Contacts)
-    elif escolha == "3":
+    elif option == "3":
         view_contacts(Contacts)
-        Index = int(input("Type the number of the Contact you want to edit: "))
+        Index = int(input("Type the Contact Number you want to edit: "))
         edit_contact(Contacts, Index)
-    elif escolha == "7":
+    elif option == "4":
+        view_contacts(Contacts)
+        Index = int(input("Type the Contact Number you want to favorite / unfavorite: "))
+        mark_unmark_favorite(Contacts, Index)
+    elif option == "7":
         break
