@@ -24,7 +24,7 @@ The application allows users to manage a digital contact list with the following
 1.  **Prerequisites**: Ensure you have Python installed on your machine.
 2.  **Clone the repository**:
     ```bash
-    git clone [https://github.com/your-username/contact-book-python.git](https://github.com/your-username/contact-book-python.git)
+    git clone https://github.com/gigio-mm/contact-book.git
     ```
 3.  **Navigate to the folder**:
     ```bash
