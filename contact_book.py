@@ -65,6 +65,19 @@ def view_favorites(Contacts):
             print(f"{Index + 1}. [{status} ] {name} - Phone: {phone} / E-mail: {email}")
     return
 
+def delete_contact(Contacts, index):
+    real_index = int(index - 1)
+
+    if 0 <= real_index < len(Contacts):
+        contact_name = Contacts[real_index]['name']
+
+        Contacts.pop(real_index)
+    
+        print(f"\nContact {contact_name} deleted.")
+    else:
+        print(f"\nInvalid Contact number. Please try again.")
+    return
+
 Contacts = []
 while True:
     print("\nContact Book Menu:")
@@ -95,5 +108,9 @@ while True:
         mark_unmark_favorite(Contacts, Index)
     elif option == "5":
         view_favorites(Contacts)
+    elif option == "6":
+        view_contacts(Contacts)
+        Index = int(input("Type the Contact Number you want to delete: "))
+        delete_contact(Contacts, Index)
     elif option == "7":
         break
